@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical–Surgical Nursing – Chapter 2 Exam</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #004d66, #00a37c);
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+        }
+        
+        .container {
+            width: 100vw;
+            height: 100vh;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            box-shadow: 0 0 40px rgba(0,0,0,0.3);
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #004d66, #00a37c);
+            color: white;
+            padding: 20px 30px;
+            flex-shrink: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 85px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            border-bottom: 4px solid #003d4d;
+        }
+        
+        .header-content {
+            flex: 1;
+        }
+        
+        .header h1 {
+            font-size: 1.6rem;
+            margin: 0;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        
+        .subtitle {
+            font-size: 1rem;
+            opacity: 0.95;
+            margin-top: 5px;
+            font-weight: 500;
+        }
+        
+        .counter {
+            background: rgba(255,255,255,0.2);
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            min-width: 100px;
+            text-align: center;
+            white-space: nowrap;
+            margin-left: 20px;
+            border: 2px solid rgba(255,255,255,0.3);
+            backdrop-filter: blur(5px);
+        }
+        
+        .progress-container {
+            width: 100%;
+            height: 8px;
+            background: #e0f2f1;
+            flex-shrink: 0;
+            position: relative;
+        }
+        
+        .progress-bar {
+            background: linear-gradient(90deg, #00a37c, #004d66);
+            height: 100%;
+            width: 0%;
+            transition: width 0.4s ease;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            padding: 30px;
+            background: #f4f9f8;
+        }
+        
+        .question-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            border: 3px solid #b2dfdb;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+        
+        .question-header {
+            display: flex;
+            gap: 25px;
+            align-items: flex-start;
+            margin-bottom: 30px;
+        }
+        
+        .question-number {
+            background: linear-gradient(135deg, #007d68, #00a37c);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            font-weight: bold;
+            flex-shrink: 0;
+            box-shadow: 0 6px 20px rgba(0, 163, 124, 0.3);
+        }
+        
+        .question-text {
+            font-size: 1.4rem;
+            line-height: 1.7;
+            color: #004d66;
+            flex-grow: 1;
+            font-weight: 600;
+            padding-right: 15px;
+        }
+        
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+        
+        .option {
+            padding: 20px;
+            border: 3px solid #b2dfdb;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 1.15rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        
+        .option:hover {
+            background: #e0f2f1;
+            border-color: #009688;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,150,136,0.15);
+        }
+        
+        .option-letter {
+            background: linear-gradient(135deg, #009688, #00796b);
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+            border: 3px solid #00796b;
+        }
+        
+        .option.correct {
+            background: linear-gradient(135deg, #66bb6a, #43a047);
+            border-color: #43a047;
+            color: white;
+        }
+        
+        .option.correct .option-letter {
+            background: #43a047;
+            color: white;
+            border-color: #388e3c;
+        }
+        
+        .option.incorrect {
+            background: linear-gradient(135deg, #ef5350, #e53935);
+            border-color: #e53935;
+            color: white;
+        }
+        
+        .option.incorrect .option-letter {
+            background: #e53935;
+            color: white;
+            border-color: #d32f2f;
+        }
+        
+        .feedback-area {
+            flex-shrink: 0;
+        }
+        
+        .feedback {
+            padding: 25px;
+            border-radius: 15px;
+            display: none;
+            align-items: center;
+            gap: 20px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            animation: slideIn 0.3s ease;
+            margin-bottom: 20px;
+        }
+        
+        .feedback.correct {
+            background: linear-gradient(135deg, #c8e6c9, #a5d6a7);
+            border: 3px solid #43a047;
+            color: #1b5e20;
+            display: flex;
+        }
+        
+        .feedback.incorrect {
+            background: linear-gradient(135deg, #ffcdd2, #ef9a9a);
+            border: 3px solid #e53935;
+            color: #b71c1c;
+            display: flex;
+        }
+        
+        .feedback-icon {
+            font-size: 1.8rem;
+            flex-shrink: 0;
+        }
+        
+        .rationale {
+            background: linear-gradient(135deg, #fff8e1, #ffecb3);
+            border: 3px solid #ffb300;
+            border-radius: 15px;
+            padding: 25px;
+            display: none;
+            animation: slideIn 0.3s ease;
+        }
+        
+        .rationale.show {
+            display: block;
+        }
+        
+        .rationale h4 {
+            color: #ff6f00;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.3rem;
+        }
+        
+        .rationale p {
+            color: #ff6f00;
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+        
+        .calculation-work {
+            background: #fffde7;
+            border-left: 4px solid #4fc3f7;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 1.05rem;
+            white-space: pre-line;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+            background: #b2dfdb;
+            border-top: 3px solid #80cbc4;
+            flex-shrink: 0;
+            height: 80px;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .btn {
+            padding: 15px 35px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+            white-space: nowrap;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #009688, #00796b);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,121,107,0.4);
+            background: linear-gradient(135deg, #00796b, #004d40);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #90a4ae, #78909c);
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(144, 164, 174, 0.4);
+            background: linear-gradient(135deg, #78909c, #546e7a);
+        }
+        
+        .btn-cancel {
+            background: linear-gradient(135deg, #ef5350, #e53935);
+            color: white;
+            display: none;
+        }
+        
+        .btn-cancel:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(229, 57, 53, 0.4);
+            background: linear-gradient(135deg, #e53935, #c62828);
+        }
+        
+        .btn-cancel.show {
+            display: flex;
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                height: 75px;
+                padding: 15px 20px;
+            }
+            
+            .header h1 {
+                font-size: 1.3rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .option {
+                padding: 15px;
+                font-size: 1.05rem;
+                gap: 15px;
+            }
+            
+            .option-letter {
+                width: 40px;
+                height: 40px;
+                font-size: 1.1rem;
+            }
+            
+            .main-content {
+                padding: 20px;
+            }
+            
+            .question-area {
+                padding: 20px;
+            }
+            
+            .navigation {
+                padding: 15px 20px;
+                height: 70px;
+            }
+            
+            .btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+            
+            .nav-buttons {
+                gap: 10px;
+            }
+        }
+        
+        @media (max-height: 700px) {
+            .header {
+                height: 70px;
+                padding: 15px 20px;
+            }
+            
+            .question-area {
+                padding: 20px;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .option {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <div class="header-content">
+            <h1>Medical-Surgical Nursing (Chapter 2)</h1>
+            <div class="subtitle">Community & Home Health Focus – 34 Questions</div>
+        </div>
+        <div class="counter" id="counter">1/34</div>
+    </div>
+    
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+    
+    <div class="main-content">
+        <div class="question-area">
+            <div class="question-header">
+                <div class="question-number" id="questionNumber">1</div>
+                <div class="question-text" id="question"></div>
+            </div>
+            
+            <div class="options-container" id="options"></div>
+        </div>
+        
+        <div class="feedback-area">
+            <div class="feedback" id="feedback">
+                <div class="feedback-icon" id="feedbackIcon"></div>
+                <div id="feedbackText"></div>
+            </div>
+            <div class="rationale" id="rationale">
+                <h4>📚 RATIONALE:</h4>
+                <p id="rationaleText"></p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="navigation">
+        <button class="btn btn-secondary" id="prevBtn" onclick="previousCard()">
+            ⬅️ Previous
+        </button>
+        <div class="nav-buttons">
+            <button class="btn btn-cancel" id="cancelBtn" onclick="cancelSelection()">
+                ❌ Cancel
+            </button>
+            <button class="btn btn-primary" id="nextBtn" onclick="nextCard()">
+                Next ➡️
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Chapter 2: Medical-Surgical Nursing (Community & Home Health) – 34 questions
+    const questions = [
+        {
+            id: 1,
+            question: "1. The nurse navigator is coordinating the transition from the hospital to a rehabilitation facility of a client who had a total hip replacement. Which activity would be an example of the nurse navigator role for this client?",
+            options: [
+                "A. Ensuring cost-effective care",
+                "B. Communicating with the medical insurance company",
+                "C. Educating the client on the goals of rehabilitation",
+                "D. Providing direct care to the client"
+            ],
+            correct: 2, // C
+            rationale: "Correct. The role of the nurse navigator is to assist clients with transitions in different levels of care, such as from the hospital to a rehabilitation facility. It is the role of a case manager to ensure cost-effective care and to communicate with the medical insurance company. The nurse navigator does not provide direct care to clients. (PTS:1 REF:p.35)"
+        },
+        {
+            id: 2,
+            question: "2. The nursing instructor is preparing a group of students for their home care rotation. Which of the following types of care are the students most likely to provide?",
+            options: [
+                "A. Primary care",
+                "B. Assistance with food shopping",
+                "C. Performing household chores",
+                "D. Skilled nursing care"
+            ],
+            correct: 3, // D
+            rationale: "Correct. The role of the home health nurse is to provide skilled nursing care to clients. The home health nurse does not provide primary care to the client as this is not within the scope of practice of a nurse without an advanced practice certification. The home health aide or other assistive person may help with household chores and shopping. (PTS:1 REF:p.49)"
+        },
+        {
+            id: 3,
+            question: "3. The community health nurse is preparing to conduct a home visit on a client without an active infection. When performing the home visit, how should the nurse best implement the principles of infection control?",
+            options: [
+                "A. Perform hand hygiene before and after giving direct client care.",
+                "B. Remove the client's soiled wound dressings from the home promptly.",
+                "C. Use transmission-based precautions with the client.",
+                "D. Establish a sterile field in the client's home before providing care."
+            ],
+            correct: 0, // A
+            rationale: "Correct. Infection control is as important in the home as it is in the hospital. As in any situation, nurses should clean the hands before and after giving direct client care. Removing the wound dressings from the home is not necessary as long as they are disposed of properly. Transmission-based precautions are only necessary when the client is infected with an infectious organism. A sterile field is not necessary to provide routine care. (PTS:1 REF:p.50)"
+        },
+        {
+            id: 4,
+            question: "4. An adult client with a history of diabetes is scheduled for a transmetatarsal amputation. When should the client's discharge planning begin?",
+            options: [
+                "A. The day prior to discharge",
+                "B. The day of estimated discharge",
+                "C. The day that the client is admitted",
+                "D. Once the nursing care plan has been finalized"
+            ],
+            correct: 2, // C
+            rationale: "Correct. Discharge planning begins with the client's admission to the hospital and must consider the possible need for follow-up home care. Discharge planning should begin prior to the other listed times. (PTS:1 REF:p.53)"
+        },
+        {
+            id: 5,
+            question: "5. A home health nurse is preparing to make the initial visit to a new client's home. When planning educational interventions, what information should the nurse provide to the client and family? Select all that apply.",
+            options: [
+                "A. Available community resources to meet their needs",
+                "B. Information on other clients in the area with similar health care needs",
+                "C. The nurse's contact information",
+                "D. Dates and times of scheduled home care visits",
+                "E. The goals of care established by the nurse"
+            ],
+            correct: [0, 2, 3], // A, C, D
+            rationale: "Correct. The community-based nurse is responsible for informing the client and family about the community resources available to meet their needs. During initial and subsequent home visits, the nurse helps the client and family identify these community services and encourages them to contact the appropriate agencies. The nurse also provides the client with contact information so that the client and family know how to reach the nurse with questions or a problem. The nurse also provides the client with a schedule of futures visits so the client knows when to expect visits. Following HIPAA guidelines the nurse is not able to share information on other clients. The goals for care should be developed with the client and not by the nurse alone. (PTS:1 REF:p.51)"
+        },
+        {
+            id: 6,
+            question: "6. At the beginning of a day that will involve several home visits, the nurse has ensured that the health care agency has a copy of the nurse's daily schedule. What is the rationale for this action?",
+            options: [
+                "A. It allows the agency to keep track for billing purposes.",
+                "B. It supports safety precautions for the nurse when making a home care visit.",
+                "C. It allows for greater flexibility for the nurse and colleagues for changes in assignments.",
+                "D. It allows the client to cancel or change appointments with minimal inconvenience."
+            ],
+            correct: 1, // B
+            rationale: "Correct. Whenever a nurse makes a home visit, the agency should know the nurse's schedule and the locations of the visits. The other answers are incorrect because providing the agency with a copy of the daily schedule is not for the purpose of correctly handling payment or for the ease of the nurse in changing assignments. It is also not intended for the client's ease in cancelling appointments. (PTS:1 REF:p.51)"
+        },
+        {
+            id: 7,
+            question: "7. There are specific legal guidelines and regulations for the documentation related to home care. When providing care for a client who is a Medicaid recipient, what is most important for the nurse to document?",
+            options: [
+                "A. The medical diagnosis and the supplies needed to care for the client",
+                "B. A summary of the client's income tax paid during the previous year",
+                "C. The specific quality of nursing care that is needed",
+                "D. The client's homebound status and the specific need for skilled nursing care"
+            ],
+            correct: 3, // D
+            rationale: "Correct. Medicare, Medicaid, and third-party payers require documentation of the client's homebound status and the need for skilled professional nursing care. The medical diagnosis and specific detailed information on the functional limitations of the client are usually part of the documentation. The other answers are incorrect because nursing documentation does not include needed supplies, tax information, or the quality of care needed. (PTS:1 REF:p.52)"
+        },
+        {
+            id: 8,
+            question: "8. A client has had a total knee replacement and will need to walk with a two-wheeled walker for 6 weeks. The client is being discharged home with a referral for home health care. What assessment should the nurse prioritize during the initial nursing assessment in the home?",
+            options: [
+                "A. Assistance of family and neighbors",
+                "B. Qualification for government subsidies",
+                "C. Costs related to the visits",
+                "D. Characteristics of the home environment"
+            ],
+            correct: 3, // D
+            rationale: "Correct. The initial assessment includes evaluating the client, the home environment, the client's self-care abilities or the family's ability to provide care, and the client's need for additional resources. Normally an assessment is not made of assistance on the part of neighbors or the costs of the visit. Qualifications for subsidies would normally be determined beforehand. (PTS:1 REF:p.51)"
+        },
+        {
+            id: 9,
+            question: "9. A nurse who has an advanced degree in primary care for a pediatric population is employed in a health clinic. In what role is this nurse functioning?",
+            options: [
+                "A. Nurse practitioner",
+                "B. Case coordinator",
+                "C. Clinical nurse specialist",
+                "D. Clinic supervisor"
+            ],
+            correct: 0, // A
+            rationale: "Correct. Nurse practitioners, educated in primary care, often practice in ambulatory care settings that focus on gerontology, pediatrics, family or adult health, or women's health. Case coordinators and clinical supervisors do not necessarily require an advanced degree, and a clinical nurse specialist is not educated in primary care. Primary care is the specific focus of CNPs. (PTS:1 REF:p.50)"
+        },
+        {
+            id: 10,
+            question: "10. A master's degree-prepared nurse is helping other nurses on a medical–surgical unit integrate evidence and research into their practice. Which role is this nurse performing?",
+            options: [
+                "A. Case manager",
+                "B. Clinical nurse leader",
+                "C. Nurse navigator",
+                "D. Critical care nurse"
+            ],
+            correct: 1, // B
+            rationale: "Correct. A clinical nurse leader (CNL) is a certified nurse generalist with a master's degree in nursing who integrates evidence-based practices into client care. A case manager, who may not have a graduate degree or be a nurse, coordinates health care services to ensure cost-effectiveness, accountability, and quality care for a caseload of clients. A nurse navigator works with a given population of clients with a common diagnosis or disease to help the client and family transition through different levels of care. A critical care nurse is a staff nurse who works in an intensive care unit. (PTS:1 REF:p.36)"
+        },
+        {
+            id: 11,
+            question: "11. A recent nursing school graduate has chosen to pursue a community nursing position because of increasing opportunities for nurses in community settings. What change(s) in the American health care system have created an increased need for nurses to practice in community-based settings? Select all that apply.",
+            options: [
+                "A. Tighter insurance regulations",
+                "B. Younger population",
+                "C. Increased rural population",
+                "D. Changes in federal legislation",
+                "E. Decreasing hospital revenues"
+            ],
+            correct: [0, 3, 4], // A, D, E
+            rationale: "Correct. Changes in federal legislation, tighter insurance regulations, decreasing hospital revenues, and alternative health care delivery systems have also affected the ways in which health care is delivered. The United States does not have an increased rural population nor is our population younger. (PTS:1 REF:p.34)"
+        },
+        {
+            id: 12,
+            question: "12. A nursing student has taught a colleague that nursing practice is not limited to hospital settings, explaining that nurses are now working in ambulatory health clinics, hospice settings, and homeless shelters and clinics. What factor has most influenced this increased diversity in practice settings for nurses?",
+            options: [
+                "A. Population shift to more rural areas",
+                "B. Shift of health care delivery into the community",
+                "C. Advent of primary care clinics",
+                "D. Increased use of rehabilitation hospitals"
+            ],
+            correct: 1, // B
+            rationale: "Correct. As health care delivery shifts into the community, more nurses are working in a variety of community-based settings. These settings include public health departments, ambulatory health clinics, long-term care facilities, hospice settings, industrial settings (as occupational nurses), homeless shelters and clinics, nursing centers, home health agencies, urgent care centers, same-day surgical centers, short-stay facilities, and clients' homes. The other answers are incorrect because our population has not shifted to a more rural base, and the use of primary care clinics has not led to an increase in practice settings or the use of rehabilitation hospitals. (PTS:1 REF:p.34)"
+        },
+        {
+            id: 13,
+            question: "13. A nurse is collaborating with a team of community nurses to identify the vision and mission for community care. What is the central focus of nursing?",
+            options: [
+                "A. Increased health literacy in the community",
+                "B. Distributing ownership for the health of the community",
+                "C. Promoting and maintaining the health of individuals and families",
+                "D. Identifying links between lifestyle and health"
+            ],
+            correct: 2, // C
+            rationale: "Correct. Community-based nursing practice focuses centrally on promoting and maintaining the health of individuals and families, preventing and minimizing the progression of disease, and improving quality of life. Health literacy is not a goal in itself, but rather a means to promoting health. Distributing ownership and identifying links between lifestyle and health are not the essence of community-based care. (PTS:1 REF:p.36)"
+        },
+        {
+            id: 14,
+            question: "14. A nurse provides community-based care and acts as the case manager for a small town about 60 miles (100 km) from a major health care center. When planning care in the community, what is the most important variable in community-based nursing that the nurse should integrate into planning?",
+            options: [
+                "A. Eligibility requirements for services",
+                "B. Community resources available to clients",
+                "C. Transportation costs to the medical center",
+                "D. Possible charges for any services provided"
+            ],
+            correct: 1, // B
+            rationale: "Correct. A community-based nurse must first be knowledgeable about community resources available to clients as well as services provided by local agencies, eligibility requirements, and any possible charges for the services. The other answers are incorrect because they are not the most important factors about which a community-based nurse must be knowledgeable, even though each must be considered. (PTS:1 REF:p.49)"
+        },
+        {
+            id: 15,
+            question: "15. The community-based care manager works in a medium-sized community that does not have an up-to-date discharge planning directory, so the nurse has been given the task of beginning to compile one. What will need to be included with the discharge plan? Select all that apply.",
+            options: [
+                "A. Links to online health sciences journals",
+                "B. Collaboration of referring agency with community resources",
+                "C. Eligibility requirements for services",
+                "D. Lists of the most commonly used resources",
+                "E. Discharge plan communication"
+            ],
+            correct: [1, 2, 3, 4], // B, C, D, E
+            rationale: "Correct. A discharge planning directory should include the commonly used community resources that clients need as set in the discharge plan, including eligibility requirements for those resources, and open communication within the referral systems. The discharge plan would not include links to online professional journals (which are intended for health care providers). (PTS:1 REF:p.53)"
+        },
+        {
+            id: 16,
+            question: "16. The nurse is assessing a new client and the client's home environment following a referral for community-based care. What action should the nurse prioritize during this initial visit?",
+            options: [
+                "A. Help the client and family to become more involved in their community.",
+                "B. Encourage the client and family to delegate someone to contact community resources.",
+                "C. Educate the client and family about how to evaluate online supports.",
+                "D. Encourage the client and family to connect with appropriate community resources."
+            ],
+            correct: 3, // D
+            rationale: "Correct. During initial and subsequent home visits, the nurse helps the client and family identify community services and encourages them to contact the appropriate agencies. This is preferable to delegating another person to make contact. When appropriate, nurses may make the initial contact. A home-health nurse would not normally encourage the client to become more involved in the community as a means of promoting health. Online forms of support can be useful, but they are not the sole form of support that most clients need. (PTS:1 REF:p.53)"
+        },
+        {
+            id: 17,
+            question: "17. A community-based case manager is sending a community nurse to perform an initial home assessment of a newly referred client. To ensure safety, the case manager must make the nurse aware of which of the following?",
+            options: [
+                "A. The potential for at-risk working environments",
+                "B. Self-defense strategies",
+                "C. Locations of emergency services in the area",
+                "D. Standard precautions for infection control"
+            ],
+            correct: 0, // A
+            rationale: "Correct. Based on the principle of due diligence, agencies must inform employees of at-risk working environments. The case manager is not responsible for teaching or checking on the self-defense skills of the community nurse. While knowing the location of emergency services might be useful, it does not ensure the safety of the community nurse. All nurses must be aware of standard precautions for infection control when providing client care, but this knowledge does not ensure the safety of the nurse. (PTS:1 REF:p.51)"
+        },
+        {
+            id: 18,
+            question: "18. A home health nurse is making a visit to a new client who is receiving home care following a mastectomy. During the visit, the client's husband arrives home in an intoxicated state and speaks to both the nurse and the client in an abusive manner. What is the nurse's best response?",
+            options: [
+                "A. Ignore the husband and focus on the client.",
+                "B. Return to the agency and notify the supervisor.",
+                "C. Call 911 immediately.",
+                "D. Remove the client from the home immediately."
+            ],
+            correct: 1, // B
+            rationale: "Correct. If a dangerous situation is encountered during a visit, the nurse should return to the agency and contact his or her supervisor or law enforcement officials, or both. Ignoring the husband or calling the police while in the home or attempting to remove the client from the home could further endanger the nurse and the client. (PTS:1 REF:p.51)"
+        },
+        {
+            id: 19,
+            question: "19. The community-health nurse has received a referral for a new client who resides in a high-crime area. What is the most important request that the nurse should make of the agency to ensure safety?",
+            options: [
+                "A. An early morning or late afternoon appointment",
+                "B. An assigned parking space in the neighborhood",
+                "C. A colleague to accompany the nurse on the visit",
+                "D. Someone to wait in the car while the nurse makes the visit"
+            ],
+            correct: 2, // C
+            rationale: "Correct. When making visits in high-crime areas, visit with another person rather than alone. A person who is waiting in the car is of little benefit. An early morning or late afternoon appointment would not necessarily guarantee safety. Similarly, assigned parking would not guarantee the nurse's safety while performing the visit. (PTS:1 REF:p.51)"
+        },
+        {
+            id: 20,
+            question: "20. A home health nurse is admitting a new client to home care services. Which action(s) should the nurse perform during medication reconciliation? Select all that apply.",
+            options: [
+                "A. Check for duplicate medications.",
+                "B. Assess for use of herbal remedies.",
+                "C. Encourage the use of multiple pharmacies.",
+                "D. Check that the correct dose is being administered.",
+                "E. Assure the proper frequency of administration."
+            ],
+            correct: [0, 1, 3, 4], // A, B, D, E (C is incorrect)
+            rationale: "Correct. Medication reconciliation includes reviewing all medications for duplicate medications. This can occur when there are multiple health care providers prescribing medications or several pharmacies are used. When reviewing medications, the nurse should include herbal remedies and vitamins to ensure that there are no interactions with prescribed medications. The nurse also assesses if the client is taking the correct dose at the correct time. The nurse should not encourage the use of multiple pharmacies as this increases the risk of duplicate medications and drug-drug interactions. (PTS:1 REF:p.52)"
+        },
+        {
+            id: 21,
+            question: "21. The nurse is performing initial visits to two new clients of the local home health care service. These clients live within two blocks of each other and both homes are in a high-crime area. What action best protects the nurse's personal safety?",
+            options: [
+                "A. Drive a car that is hard to break into.",
+                "B. Keep your satchel close at hand at all times.",
+                "C. Do not leave anything in the car that might be stolen.",
+                "D. Do not wear expensive jewelry."
+            ],
+            correct: 3, // D
+            rationale: "Correct. Do not drive an expensive car or wear expensive jewelry when making visits in order to reduce the chance of being robbed. While all of these answers might be wise precautions to take, the other suggestions address property security rather than personal safety. (PTS:1 REF:p.51)"
+        },
+        {
+            id: 22,
+            question: "22. In 2 days the nurse is scheduled to discharge a client home after left hip replacement. The nurse has initiated a home health referral and met with a team of people who have been involved with this client's discharge planning. Knowing that the client lives alone, who would be appropriate people to be on the discharge planning team? Select all that apply.",
+            options: [
+                "A. Home health nurse",
+                "B. Physical therapist",
+                "C. Pharmacy technician",
+                "D. Social worker",
+                "E. Meals-on-Wheels provider"
+            ],
+            correct: [0, 1, 3], // A, B, D
+            rationale: "Correct. The development of a comprehensive discharge plan requires collaboration with professionals at both the referring agency and the home care agency, as well as other community agencies that provide specific resources upon discharge. The pharmacy technician does not participate in discharge planning, and there is no indication that utilizing Meals on Wheels is necessary. (PTS:1 REF:p.53)"
+        },
+        {
+            id: 23,
+            question: "23. A home health nurse is conducting a home visit to a client who receives wound care twice weekly for a diabetic foot ulcer. While performing the dressing change, the nurse realizes that the nurse has forgotten to bring the adhesive gauze specified in the wound-care regimen. What is the nurse's best action?",
+            options: [
+                "A. Phone a colleague to bring the required supplies as soon as possible.",
+                "B. Improvise, if possible, using sterile gauze and adhesive tape.",
+                "C. Leave the wound open to air and teach the client about infection control.",
+                "D. Schedule a return visit for the following day."
+            ],
+            correct: 1, // B
+            rationale: "Correct. Improvisation is a necessity in many home health situations. It would be logistically difficult to have the supplies delivered and leaving the wound open to air may be contraindicated. A return visit the next day does not resolve the immediate problem. (PTS:1 REF:p.50)"
+        },
+        {
+            id: 24,
+            question: "24. The hospital nurse is planning for a client's discharge. What is the initial action the nurse should take when planning discharge for a client?",
+            options: [
+                "A. Identifying the client's specific needs",
+                "B. Making a social services referral",
+                "C. Getting physical therapy involved in care",
+                "D. Asking the dietitian to meet with the client"
+            ],
+            correct: 0, // A
+            rationale: "Correct. The first step in the discharge planning process involves identifying the client's specific needs and developing a plan to care to meet those needs. Once the specific needs have been identified, the nurse can then make referrals to other health care professionals to meet these needs, such as the social worker, physical therapist, or dietitian. (PTS:1 REF:p.36)"
+        },
+        {
+            id: 25,
+            question: "25. Within the public health system there has been an increased demand for medical, nursing, and social services. The nurse should recognize what phenomenon as the basis for this increased demand?",
+            options: [
+                "A. Increased use of complementary and alternative therapies",
+                "B. The growing number of older adults in the population",
+                "C. The rise in income disparity",
+                "D. Increasing profit potential for home health services"
+            ],
+            correct: 1, // B
+            rationale: "Correct. The growing number of older adults increases the demand for medical, nursing, and social services within the public health system. Income disparities, profit potential, and increased use of complementary therapies do not account for this change. (PTS:1 REF:p.34)"
+        },
+        {
+            id: 26,
+            question: "26. Nursing care is provided in an increasingly diverse variety of settings. Despite the variety in settings, some characteristics of professional nursing practice are required in any and every setting. These characteristics include:",
+            options: [
+                "A. advanced education.",
+                "B. certification in a chosen specialty.",
+                "C. cultural competence.",
+                "D. independent practice."
+            ],
+            correct: 2, // C
+            rationale: "Correct. Cultural competence is necessary in any and every care setting. The other answers are incorrect because an advanced education, specialty certification, and the ability to practice independently are not consistencies between every nursing care delivery setting. (PTS:1 REF:p.34)"
+        },
+        {
+            id: 27,
+            question: "27. The nurse is planning discharge for a client receiving Medicare. The Medicare program facilitates what aspect of home health care for the client?",
+            options: [
+                "A. Providing care without the oversight of a health care provider",
+                "B. Writing necessary medication orders for the client",
+                "C. Prescribing physical, occupational, and speech therapy if needed",
+                "D. Providing outcome-based client care"
+            ],
+            correct: 3, // D
+            rationale: "Correct. Many home health care expenditures are financed by Medicare. Medicare uses the Outcome and Assessment Information Set (OASIS) to promote outcome-based client care. Home health nurses, despite who funds their visits, do not provide care without the oversight of a health care provider; they do not write medication orders; nor do they order the services of ancillary specialists such as physical, occupational, or speech therapists. (PTS:1 REF:p.50)"
+        },
+        {
+            id: 28,
+            question: "28. A home health nurse has been working for several months with a client who is receiving rehabilitative services. The nurse is aware that maintaining the client's confidentiality is a priority. How can the nurse best protect the client's right to confidentiality?",
+            options: [
+                "A. Avoid bringing the client's medical record to the home.",
+                "B. Discuss the client's condition and care only when the client is alone in the home.",
+                "C. Keep the client's medical record secured at all times.",
+                "D. Ask the client to avoid discussing the client's home care with friends and neighbors."
+            ],
+            correct: 2, // C
+            rationale: "Correct. If the nurse carries a client's medical record into a house, it must be put in a secure place to prevent it from being picked up by others or from being misplaced. This does not mean, however, that it must never be brought to the home. It is not normally necessary to limit discussions to times when the client is alone. The client has the right to decide with whom he will discuss his condition and care. (PTS:1 REF:p.50)"
+        },
+        {
+            id: 29,
+            question: "29. A home health nurse has completed a visit to a client and has immediately begun to document the visit. Accurate documentation that is correctly formatted is necessary for what reason?",
+            options: [
+                "A. Guarantees that the nurse will not be legally liable for unexpected outcomes",
+                "B. Ensures that the agency is correctly reimbursed for the visit",
+                "C. Allows the client to gauge progress over time",
+                "D. Facilitates safe delegation of care to unlicensed caregivers"
+            ],
+            correct: 1, // B
+            rationale: "Correct. The client's needs and the nursing care provided must be documented to ensure that the agency qualifies for payment for the visit. Documentation does not guarantee an absence of liability. Documentation is not normally provided to the client to gauge progress. Documentation is not primarily used to facilitate delegation to unlicensed caregivers. (PTS:1 REF:p.52)"
+        },
+        {
+            id: 30,
+            question: "30. A home health nurse has completed a scheduled home visit to a client with a chronic sacral ulcer. The nurse is now evaluating and documenting the need for future visits and the frequency of those visits. What question should the nurse use when attempting to determine this need?",
+            options: [
+                "A. \"How does the client describe the client's coping style?\"",
+                "B. \"When was the client first diagnosed with this wound?\"",
+                "C. \"Is the client's family willing to participate in care?\"",
+                "D. \"Is the client willing to create a plan of care?\""
+            ],
+            correct: 2, // C
+            rationale: "Correct. Determining the willingness and ability of friends and family to provide care can help determine appropriate levels of professional home care. The time of initial diagnosis and the client's coping style are secondary. The nurse, not the client, is responsible for creating the plan of care. (PTS:1 REF:p.52)"
+        },
+        {
+            id: 31,
+            question: "31. A home health nurse is conducting an assessment of a client who may qualify for Medicare. Consequently, the nurse is utilizing the Outcome and Assessment Instrument Set (OASIS). When performing an assessment using this instrument, the nurse should assess what domain of the client's current status?",
+            options: [
+                "A. Psychiatric status",
+                "B. Spiritual state",
+                "C. Compliance with care",
+                "D. Functional status"
+            ],
+            correct: 3, // D
+            rationale: "Correct. The Omaha System of care documentation has been required for over a decade to assure that outcome-based care is provided for all care reimbursed by Medicare. This system uses sociodemographic, environment, support system, health status, and functional status domains to assess and plan care for adult clients. It does not explicitly assess spirituality, psychiatric status, or compliance with care. (PTS:1 REF:p.50)"
+        },
+        {
+            id: 32,
+            question: "32. The home care nurse is assessing a client's use of crutches in the home. Which of the following actions by the client indicates that the client is using the crutches effectively?",
+            options: [
+                "A. Placing the crutches on the unaffected side to rise from a sitting position",
+                "B. Placing the crutches on lower step and moving the affected leg first when descending stairs",
+                "C. Advancing affected leg first, then crutches, then unaffected leg when ascending stairs",
+                "D. Placing the unaffected leg forward when sitting down"
+            ],
+            correct: 1, // B
+            rationale: "Correct. When descending stairs with crutches, the correct technique is to place the crutches on the lower step, then advance the affected leg, and move the unaffected leg last. The other techniques described are wrong and indicate that more teaching is needed on the use of crutches. (PTS:1 REF:p.47)"
+        },
+        {
+            id: 33,
+            question: "33. The home health nurse receives a referral from the hospital for a client who needs a home visit for wound care. After obtaining the referral, what action should the nurse first take?",
+            options: [
+                "A. Have community services make contact with the client.",
+                "B. Obtain a health care provider's prescription for the visit.",
+                "C. Call the client to obtain permission to visit.",
+                "D. Arrange for a home health aide to initially visit the client."
+            ],
+            correct: 2, // C
+            rationale: "Correct. After receiving a referral, the first step is to call the client and obtain permission to make the visit. Then the nurse should schedule the visit and verify the address. A health care provider's prescription is not necessary to schedule a visit with the client. The nurse may identify community services or the need for a home health aide after assessing the client and the home environment during the first visit with the client. This would not be delegated to a home health aide. (PTS:1 REF:p.50)"
+        },
+        {
+            id: 34,
+            question: "34. A hospital nurse is transitioning to a home health nurse position. The nurse has that the client smokes while at home. What will the nurse need to do to work therapeutically with the client in the home setting?",
+            options: [
+                "A. Request another assignment if there is dissonance with the client's lifestyle.",
+                "B. Ask the client to come to the agency to receive treatment, if possible.",
+                "C. Resolve to convey respect for the client's beliefs and choices.",
+                "D. Try to adapt the client's home to the norms of a hospital environment."
+            ],
+            correct: 2, // C
+            rationale: "Correct. To work successfully with clients in any setting, the nurse must be nonjudgmental and convey respect for clients' beliefs, even if they differ sharply from the nurse's. This can be difficult when a client's lifestyle involves activities that a nurse considers harmful or unacceptable, such as smoking, use of alcohol, drug abuse, or overeating. The nurse should not request another assignment because of a difference in beliefs, nor do nurses ask for the client to come to the agency to receive treatment. It is also inappropriate to convert the client's home to a hospital-like environment. (PTS:1 REF:p.50)"
+        }
+    ];
+
+    let currentQuestion = 0;
+    let selectedOption = null;
+    let answers = Array(questions.length).fill(null);
+
+    function loadQuestion() {
+        const q = questions[currentQuestion];
+        if (!q) return;
+
+        const progress = ((currentQuestion + 1) / questions.length) * 100;
+        document.getElementById('progressBar').style.width = `${progress}%`;
+        document.getElementById('counter').textContent = `${currentQuestion + 1}/${questions.length}`;
+        document.getElementById('questionNumber').textContent = q.id;
+
+        document.getElementById('question').innerHTML = q.question;
+        loadOptions(q);
+
+        document.getElementById('feedback').style.display = 'none';
+        document.getElementById('rationale').classList.remove('show');
+        document.getElementById('cancelBtn').classList.remove('show');
+
+        document.getElementById('prevBtn').disabled = currentQuestion === 0;
+        const stored = answers[q.id - 1];
+        document.getElementById('nextBtn').disabled = stored === null || stored === undefined;
+        document.getElementById('nextBtn').textContent = currentQuestion >= questions.length - 1 ? 'Finish ➡️' : 'Next ➡️';
+    }
+
+    function loadOptions(q) {
+        const container = document.getElementById('options');
+        container.innerHTML = '';
+        q.options.forEach((opt, idx) => {
+            const div = document.createElement('div');
+            div.className = 'option';
+            div.innerHTML = `<div class="option-letter">${String.fromCharCode(65 + idx)}</div><div>${opt}</div>`;
+            div.onclick = () => selectOption(idx);
+            container.appendChild(div);
+        });
+
+        const saved = answers[q.id - 1];
+        if (saved !== null && saved !== undefined) {
+            selectOption(saved, true);
+        }
+    }
+
+    function selectOption(index, fromMemory = false) {
+        const q = questions[currentQuestion];
+        if (!fromMemory && selectedOption !== null) return;
+
+        if (!fromMemory) {
+            selectedOption = index;
+            answers[q.id - 1] = index;
+        }
+
+        highlightSelected(index, q);
+        showFeedback(index, q);
+        document.getElementById('nextBtn').disabled = false;
+        document.getElementById('cancelBtn').classList.add('show');
+    }
+
+    function highlightSelected(index, q) {
+        const opts = document.querySelectorAll('.option');
+        opts.forEach((opt, i) => opt.classList.remove('correct', 'incorrect'));
+
+        const correctIndices = Array.isArray(q.correct) ? q.correct : [q.correct];
+        if (Array.isArray(q.correct)) {
+            correctIndices.forEach(ci => opts[ci]?.classList.add('correct'));
+            if (!correctIndices.includes(index)) {
+                opts[index]?.classList.add('incorrect');
+            }
+        } else {
+            if (index === q.correct) {
+                opts[index].classList.add('correct');
+            } else {
+                opts[index].classList.add('incorrect');
+                opts[q.correct].classList.add('correct');
+            }
+        }
+    }
+
+    function showFeedback(index, q) {
+        const fb = document.getElementById('feedback');
+        const icon = document.getElementById('feedbackIcon');
+        const text = document.getElementById('feedbackText');
+        const rationaleDiv = document.getElementById('rationale');
+        const rationaleP = document.getElementById('rationaleText');
+
+        const correctIndices = Array.isArray(q.correct) ? q.correct : [q.correct];
+        const isCorrect = correctIndices.includes(index);
+
+        if (isCorrect) {
+            fb.className = 'feedback correct';
+            icon.textContent = '✅';
+            text.textContent = 'CORRECT! Well done.';
+        } else {
+            fb.className = 'feedback incorrect';
+            icon.textContent = '❌';
+            const letters = correctIndices.map(c => String.fromCharCode(65 + c)).join(', ');
+            text.textContent = `INCORRECT. The correct answer(s): ${letters}`;
+        }
+
+        fb.style.display = 'flex';
+        rationaleP.innerHTML = q.rationale;
+        rationaleDiv.classList.add('show');
+    }
+
+    function cancelSelection() {
+        const q = questions[currentQuestion];
+        selectedOption = null;
+        answers[q.id - 1] = null;
+        document.querySelectorAll('.option').forEach(opt => opt.classList.remove('correct', 'incorrect'));
+        document.getElementById('feedback').style.display = 'none';
+        document.getElementById('rationale').classList.remove('show');
+        document.getElementById('cancelBtn').classList.remove('show');
+        document.getElementById('nextBtn').disabled = true;
+    }
+
+    function nextCard() {
+        if (currentQuestion < questions.length - 1) {
+            currentQuestion++;
+            selectedOption = null;
+            loadQuestion();
+        } else {
+            currentQuestion = 0;
+            loadQuestion();
+        }
+    }
+
+    function previousCard() {
+        if (currentQuestion > 0) {
+            currentQuestion--;
+            const q = questions[currentQuestion];
+            selectedOption = answers[q.id - 1];
+            loadQuestion();
+        }
+    }
+
+    // keyboard shortcuts
+    document.addEventListener('keydown', function(e) {
+        if (e.key >= '1' && e.key <= '4') selectOption(parseInt(e.key)-1);
+        else if (e.key >= 'a' && e.key <= 'd') selectOption(e.key.charCodeAt(0)-97);
+        else if (e.key >= 'A' && e.key <= 'D') selectOption(e.key.charCodeAt(0)-65);
+        else if (e.key === 'ArrowLeft' && !document.getElementById('prevBtn').disabled) previousCard();
+        else if (e.key === 'ArrowRight' && !document.getElementById('nextBtn').disabled) nextCard();
+        else if (e.key === 'Escape' && document.getElementById('cancelBtn').classList.contains('show')) cancelSelection();
+    });
+
+    loadQuestion();
+</script>
+</body>
+</html>
